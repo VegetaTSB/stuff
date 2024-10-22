@@ -1,0 +1,28 @@
+local RunService = game:GetService("RunService")
+local player = game.Players.LocalPlayer
+
+-- Function to check and destroy parts
+local function checkAndDestroyParts()
+    local partsToCheck = {
+        "Freeze",
+        "StopRunning",
+        "ComboStun",
+        "RagdollSim",
+        "Slowed"
+    }
+
+    for _, partName in ipairs(partsToCheck) do
+        local part = player.Character:FindFirstChild(partName)
+        if part then
+            part:Destroy()
+            print(partName .. " has been destroyed.")
+        else
+            print(partName .. " not found!")
+        end
+    end
+end
+
+-- Connect the function to the Heartbeat event
+RunService.Heartbeat:Connect(function()
+    checkAndDestroyParts()
+end)
